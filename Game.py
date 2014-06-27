@@ -1,78 +1,58 @@
-def print_board():
-    for i in range(0,3):
-        for j in range(0,3):
-            print map[2-i][j],
-            if j != 2:
-                print "|",
-        print ""
+a = raw_input('Do you want to use the calculator?')
+if a.lower() == "yes":
+	print 'If you want to get decimal answers make your first number a decimal(8.0,33.3,6.00,etc.)'
+	x = int(raw_input('Type a number:'))
+	y = int(raw_input('Type another number:'))
+	z = raw_input('Type in an operation.(+,-,*,/)')
+	total = 0
+	if z == "+":
+		total = x + y
+		print total
+	elif z == '-':
+		total = x - y
+		print total
+	elif z == '*':
+		total = x * y
+		print total
+	elif z == '/':
+		total = x/y
+		print total
+c = raw_input('Do you want to do special operations?')
+if c.lower() == 'yes':
+	d = int(raw_input('Type a number'))
+	e = raw_input('Choose an operation(Options: square,cube,fourth)')
+	if e == 'square':
+		total = d*d
+		print total
+	elif e == 'cube':
+		total = d*d*d
+		print total
+	elif e == 'fourth':
+		total = d*d*d*d
+		print total
+b = raw_input('Do you want to continue using the calculator?') 
+if b.lower() == "yes":
+	x = int(raw_input('Type a number:'))
+	y = int(raw_input('Type another number:'))
+	z = raw_input('Type in an operation.(+,-,*,/)')
+	total = 0
+	if z == "+":
+		total = x + y
+		print total
+	elif z == '-':
+		total = x - y
+		print total
+	elif z == '*':
+		total = x * y
+		print total
+	elif z == '/':
+		total = x/y
+		print total
+print "Thanks for using my calculator."
 
-
-def check_done():
-    for i in range(0,3):
-        if map[i][0] == map[i][1] == map[i][2] != " " \
-        or map[0][i] == map[1][i] == map[2][i] != " ":
-            print turn, "won!!!"
-            return True
-        
-    if map[0][0] == map[1][1] == map[2][2] != " " \
-    or map[0][2] == map[1][1] == map[2][0] != " ":
-        print turn, "won!!!"
-        return True
-
-    if " " not in map[0] and " " not in map[1] and " " not in map[2]:
-        print "Draw"
-        return True
-        
-
-    return False
-
-
-
-
-
-turn = "X"
-map = [[" "," "," "],
-       [" "," "," "],
-       [" "," "," "]]
-done = False
-
-
-while done != True:
-    print_board()
-    
-    print turn, "'s turn"
-    print
-
-    moved = False
-    while moved != True:
-        print "Please select position by typing in a number between 1 and 9, see below for which number that is which position..."
-        print "7|8|9"
-        print "4|5|6"
-        print "1|2|3"
-        print
-
-        try:
-            pos = input("Select: ")
-            if pos <=9 and pos >=1:
-                Y = pos/3
-                X = pos%3
-                if X != 0:
-                    X -=1
-                else:
-                     X = 2
-                     Y -=1
-                    
-                if map[Y][X] == " ":
-                    map[Y][X] = turn
-                    moved = True
-                    done = check_done()
-
-                    if done == False:
-                        if turn == "X":
-                            turn = "O"
-                        else:
-                            turn = "X"
-                
-            
-        except:
-            print "You need to add a numeric value"
+x = int(raw_input('Type a number: '))
+total = 0
+for y in range(1,x+1):
+	if y % 2 == 0:
+		total = total + y
+print total
