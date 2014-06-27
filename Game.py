@@ -1,80 +1,83 @@
-def print_board():
-    for i in range(0,3):
-        for j in range(0,3):
-            print map[2-i][j],
-            if j != 2:
-                print "|",
-        print ""
+def print_game(game):
+	for row in game:
+		print " | ".join(row)
 
-
-def check_done():
+def game_over():
     for i in range(0,3):
-        if map[i][0] == map[i][1] == map[i][2] != " " \
-        or map[0][i] == map[1][i] == map[2][i] != " ":
-            print turn, "won!!!"
+        if game[i][0] == game[i][1] == game[i][2] != " " \
+        or game[0][i] == game[1][i] == game[2][i] != " ":
+            print 'O' if xs_turn else 'X' + " won!!!"
             return True
         
-    if map[0][0] == map[1][1] == map[2][2] != " " \
-    or map[0][2] == map[1][1] == map[2][0] != " ":
-        print turn, "won!!!"
+    if game[0][0] == game[1][1] == game[2][2] != " " \
+    or game[0][2] == game[1][1] == game[2][0] != " ":
+    	print 'O' if xs_turn else 'X' + " won!!!"
         return True
 
-    if " " not in map[0] and " " not in map[1] and " " not in map[2]:
+    if " " not in game[0] and " " not in game[1] and " " not in game[2]:
         print "Draw"
         return True
         
 
     return False
 
+game = [
+	[" "," "," "],
+	[" "," "," "],
+	[" "," "," "]
+]
+print_game(game)
+xs_turn = True
+moved = False
+while moved != True:
+	print 'Please select your position by typing in a number between 1 and 9. Look at the chart below as an example: '
+	print '5|6|4'
+	print '2|3|1'
+	print '8|9|7'
+	print_game(game)
 
-
-
-
-turn = "X"
-map = [[" "," "," "],
-       [" "," "," "],
-       [" "," "," "]]
-done = False
-
-
-while done != True:
-    print_board()
-    
-    print turn, "'s turn"
-    print
-
-    moved = False
-    while moved != True:
-        print "Please select position by typing in a number between 1 and 9, see below for which number that is which position..."
-        print "7|8|9"
-        print "4|5|6"
-        print "1|2|3"
-        print
-
-        try:
-            pos = input("Select: ")
-            if pos <=9 and pos >=1:
-                Y = pos/3
-                X = pos%3
-                if X != 0:
-                    X -=1
-                else:
-                     X = 2
-                     Y -=1
-                    
-                if map[Y][X] == " ":
-                    map[Y][X] = turn
-                    moved = True
-                    done = check_done()
-
-                    if done == False:
-                        if turn == "X":
-                            turn = "O"
-                        else:
-                            turn = "X"
-                
-            
-        except:
-            print "You need to add a numeric value"
-        
+	try:
+		pos = raw_input('Select: ')
+		if pos <=9 and pos >=1:
+			Y = pos/3
+			X = pos%3
+			if X != 0:
+				X -=1
+			else:
+				X = 2
+				Y -= 1
+	except:
+		print 'You need to add a numeric value'
+	if pos == '9':
+		x = 0
+		y = 2
+	elif pos == '8':
+		x = 0
+		y = 1
+	elif pos == '7':
+		x = 0
+		y = 0
+	elif pos == '6':
+		x = 1
+		y = 2
+	elif pos == '5':
+		x = 1
+		y = 1
+	elif pos == '4':
+		x = 1
+		y = 0
+	elif pos == '3':
+		x = 2
+		y = 2
+	elif pos == '2':
+		x = 2
+		y = 1
+	elif pos == '1':
+		x = 2
+		y = 0
  
+	xs_turn = not xs_turn	
+	if xs_turn:
+		game[x-1][y-1] = "x"
+	else:
+		game[x-1][y-1] = "o"
